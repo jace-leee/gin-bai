@@ -1,0 +1,373 @@
+/* html-report-ko 스킬 — 한글 보고서용 스타일시트
+ * 한글 폰트 우선, 줄간격 1.75 (한국어 가독성).
+ * 이 파일을 수정하면 이후 빌드되는 모든 한글 보고서에 적용됨.
+ */
+
+/* ---------- 디자인 토큰 ---------- */
+
+:root {
+  --font-sans: "Pretendard Variable", Pretendard,
+               -apple-system, BlinkMacSystemFont,
+               "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕",
+               "Noto Sans KR", "Noto Sans CJK KR",
+               "Segoe UI", Roboto, "Helvetica Neue", Arial,
+               sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", ui-monospace, SFMono-Regular,
+               "SF Mono", Menlo, Consolas, "Liberation Mono",
+               "Apple SD Gothic Neo", "Malgun Gothic",
+               monospace;
+
+  --color-bg:        #ffffff;
+  --color-bg-soft:   #f7f8fa;
+  --color-bg-code:   #f4f4f6;
+  --color-fg:        #1a1d23;
+  --color-fg-soft:   #4a5160;
+  --color-fg-muted:  #8089a0;
+  --color-border:    #e3e6ec;
+  --color-border-soft: #eef0f4;
+  --color-link:      #2563eb;
+  --color-link-hover:#1d4ed8;
+  --color-accent:    #0f172a;
+
+  --color-success:   #15803d;
+  --color-warning:   #b45309;
+  --color-danger:    #b91c1c;
+
+  --radius:    8px;
+  --radius-sm: 4px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  --content-width: 760px;
+  --gutter: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    --color-bg:        #0f1115;
+    --color-bg-soft:   #161922;
+    --color-bg-code:   #1a1e29;
+    --color-fg:        #e7eaf0;
+    --color-fg-soft:   #b4bccc;
+    --color-fg-muted:  #7a8398;
+    --color-border:    #2a2f3c;
+    --color-border-soft: #1e222d;
+    --color-link:      #60a5fa;
+    --color-link-hover:#93c5fd;
+    --color-accent:    #f1f5f9;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg:        #0f1115;
+  --color-bg-soft:   #161922;
+  --color-bg-code:   #1a1e29;
+  --color-fg:        #e7eaf0;
+  --color-fg-soft:   #b4bccc;
+  --color-fg-muted:  #7a8398;
+  --color-border:    #2a2f3c;
+  --color-border-soft: #1e222d;
+  --color-link:      #60a5fa;
+  --color-link-hover:#93c5fd;
+  --color-accent:    #f1f5f9;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- 기본 ---------- */
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  /* 한국어 줄바꿈 처리 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.75; /* 한국어 가독성 위해 영문보다 살짝 넓게 */
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 한글에 보다 잘 어울리는 자간 */
+  letter-spacing: -0.005em;
+}
+
+main.report {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 56px var(--gutter) 96px;
+}
+
+/* ---------- 헤더 ---------- */
+
+.report-header {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.report-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin: 0 0 6px;
+  color: var(--color-accent);
+}
+
+.report-meta {
+  font-size: 0.85rem;
+  color: var(--color-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 타이포그래피 ---------- */
+
+.report-body h1,
+.report-body h2,
+.report-body h3,
+.report-body h4,
+.report-body h5,
+.report-body h6 {
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--color-accent);
+  margin: 2em 0 0.6em;
+}
+
+.report-body h1 { font-size: 1.75rem; margin-top: 0; }
+.report-body h2 { font-size: 1.4rem;  padding-bottom: 6px; border-bottom: 1px solid var(--color-border-soft); }
+.report-body h3 { font-size: 1.18rem; }
+.report-body h4 { font-size: 1.02rem; color: var(--color-fg-soft); }
+.report-body h5 { font-size: 0.92rem; color: var(--color-fg-soft); }
+.report-body h6 { font-size: 0.85rem; color: var(--color-fg-muted); }
+
+.report-body p {
+  margin: 0.9em 0;
+}
+
+.report-body strong { font-weight: 700; color: var(--color-accent); }
+.report-body em     { font-style: normal; font-weight: 600; } /* 한국어는 italic 대신 굵게가 자연스러움 */
+
+.report-body a {
+  color: var(--color-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.report-body a:hover {
+  color: var(--color-link-hover);
+  border-bottom-color: currentColor;
+}
+
+.report-body hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2em 0;
+}
+
+/* ---------- 리스트 ---------- */
+
+.report-body ul,
+.report-body ol {
+  margin: 0.9em 0;
+  padding-left: 1.6em;
+}
+.report-body li {
+  margin: 0.35em 0;
+}
+.report-body li > p {
+  margin: 0.35em 0;
+}
+.report-body ul ul,
+.report-body ol ol,
+.report-body ul ol,
+.report-body ol ul {
+  margin: 0.25em 0;
+}
+
+/* ---------- 인용구 ---------- */
+
+.report-body blockquote {
+  margin: 1.25em 0;
+  padding: 0.7em 1.15em;
+  border-left: 3px solid var(--color-border);
+  background: var(--color-bg-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--color-fg-soft);
+}
+.report-body blockquote p:first-child { margin-top: 0; }
+.report-body blockquote p:last-child  { margin-bottom: 0; }
+
+/* ---------- 코드 ---------- */
+
+.report-body code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-bg-code);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border-soft);
+  /* 한글이 인라인 코드 안에 들어와도 깨지지 않게 */
+  word-break: break-all;
+}
+
+.report-body pre {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: var(--color-bg-code);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 1.15em 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  /* 코드 블록 안에서는 자동 줄바꿈 끔 */
+  word-break: normal;
+  overflow-wrap: normal;
+}
+.report-body pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+  word-break: normal;
+}
+
+/* ---------- 표 ---------- */
+
+.report-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25em 0;
+  font-size: 0.93rem;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.report-body thead {
+  background: var(--color-bg-soft);
+}
+.report-body th,
+.report-body td {
+  padding: 9px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-soft);
+  vertical-align: top;
+}
+.report-body th {
+  font-weight: 700;
+  color: var(--color-accent);
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+}
+.report-body tbody tr:last-child td { border-bottom: 0; }
+.report-body tbody tr:nth-child(even) {
+  background: var(--color-bg-soft);
+}
+
+/* ---------- Mermaid ---------- */
+
+.report-body .mermaid,
+.report-body pre.mermaid {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin: 1.25em 0;
+  text-align: center;
+  overflow-x: auto;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+/* mermaid.js 초기화 전에 원본 텍스트가 잠깐 보이는 것 처리 */
+.report-body pre.mermaid:not([data-processed="true"]) {
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--color-fg-muted);
+  text-align: left;
+}
+
+/* ---------- details/summary ---------- */
+
+.report-body details {
+  margin: 1em 0;
+  padding: 10px 14px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius);
+}
+.report-body details > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.report-body details[open] > summary {
+  margin-bottom: 0.55em;
+}
+
+/* ---------- 이미지 ---------- */
+
+.report-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- 각주 ---------- */
+
+.report-body .footnote {
+  font-size: 0.85rem;
+  color: var(--color-fg-soft);
+  border-top: 1px solid var(--color-border);
+  margin-top: 3em;
+  padding-top: 1em;
+}
+
+/* ---------- 인쇄 ---------- */
+
+@media print {
+  body { background: #fff; color: #000; }
+  main.report { padding: 0; max-width: none; }
+  .report-body pre, .report-body table, .report-body .mermaid {
+    page-break-inside: avoid;
+    box-shadow: none;
+    border-color: #999;
+  }
+  .report-body a {
+    color: inherit;
+    border-bottom: 0;
+  }
+  .report-body a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+  .report-meta { color: #555; }
+}
+
+/* ---------- 반응형 ---------- */
+
+@media (max-width: 720px) {
+  main.report { padding: 32px 16px 64px; }
+  .report-title { font-size: 1.5rem; }
+  .report-body h2 { font-size: 1.2rem; }
+  .report-body table { font-size: 0.85rem; }
+  .report-body th, .report-body td { padding: 6px 10px; }
+}

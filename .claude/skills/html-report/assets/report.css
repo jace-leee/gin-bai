@@ -1,0 +1,364 @@
+/* html-report skill — bundled stylesheet
+ * Edit this file to change report styling globally.
+ * Reports built after edits will use the updated CSS;
+ * existing reports keep the CSS that was current when built.
+ */
+
+/* ---------- design tokens ---------- */
+
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", "Apple SD Gothic Neo",
+               "Malgun Gothic", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+               "Liberation Mono", monospace;
+
+  --color-bg:        #ffffff;
+  --color-bg-soft:   #f7f8fa;
+  --color-bg-code:   #f4f4f6;
+  --color-fg:        #1a1d23;
+  --color-fg-soft:   #4a5160;
+  --color-fg-muted:  #8089a0;
+  --color-border:    #e3e6ec;
+  --color-border-soft: #eef0f4;
+  --color-link:      #2563eb;
+  --color-link-hover:#1d4ed8;
+  --color-accent:    #0f172a;
+
+  --color-success:   #15803d;
+  --color-warning:   #b45309;
+  --color-danger:    #b91c1c;
+
+  --radius:    8px;
+  --radius-sm: 4px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  --content-width: 760px;
+  --gutter: 24px;
+}
+
+[data-theme="dark"],
+:root[data-theme="auto"] {
+  /* dark via media query below; keep light defaults for explicit auto fallback */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    --color-bg:        #0f1115;
+    --color-bg-soft:   #161922;
+    --color-bg-code:   #1a1e29;
+    --color-fg:        #e7eaf0;
+    --color-fg-soft:   #b4bccc;
+    --color-fg-muted:  #7a8398;
+    --color-border:    #2a2f3c;
+    --color-border-soft: #1e222d;
+    --color-link:      #60a5fa;
+    --color-link-hover:#93c5fd;
+    --color-accent:    #f1f5f9;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg:        #0f1115;
+  --color-bg-soft:   #161922;
+  --color-bg-code:   #1a1e29;
+  --color-fg:        #e7eaf0;
+  --color-fg-soft:   #b4bccc;
+  --color-fg-muted:  #7a8398;
+  --color-border:    #2a2f3c;
+  --color-border-soft: #1e222d;
+  --color-link:      #60a5fa;
+  --color-link-hover:#93c5fd;
+  --color-accent:    #f1f5f9;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- base ---------- */
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main.report {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 56px var(--gutter) 96px;
+}
+
+/* ---------- header ---------- */
+
+.report-header {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.report-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  color: var(--color-accent);
+}
+
+.report-meta {
+  font-size: 0.85rem;
+  color: var(--color-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- typography ---------- */
+
+.report-body h1,
+.report-body h2,
+.report-body h3,
+.report-body h4,
+.report-body h5,
+.report-body h6 {
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-accent);
+  margin: 2em 0 0.5em;
+}
+
+.report-body h1 { font-size: 1.75rem; margin-top: 0; }
+.report-body h2 { font-size: 1.4rem;  padding-bottom: 6px; border-bottom: 1px solid var(--color-border-soft); }
+.report-body h3 { font-size: 1.15rem; }
+.report-body h4 { font-size: 1rem; color: var(--color-fg-soft); }
+.report-body h5 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-fg-soft); }
+.report-body h6 { font-size: 0.85rem; color: var(--color-fg-muted); }
+
+.report-body p {
+  margin: 0.85em 0;
+}
+
+.report-body strong { font-weight: 650; color: var(--color-accent); }
+.report-body em     { font-style: italic; }
+
+.report-body a {
+  color: var(--color-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.report-body a:hover {
+  color: var(--color-link-hover);
+  border-bottom-color: currentColor;
+}
+
+.report-body hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2em 0;
+}
+
+/* ---------- lists ---------- */
+
+.report-body ul,
+.report-body ol {
+  margin: 0.85em 0;
+  padding-left: 1.6em;
+}
+.report-body li {
+  margin: 0.3em 0;
+}
+.report-body li > p {
+  margin: 0.3em 0;
+}
+.report-body ul ul,
+.report-body ol ol,
+.report-body ul ol,
+.report-body ol ul {
+  margin: 0.2em 0;
+}
+
+/* ---------- blockquote ---------- */
+
+.report-body blockquote {
+  margin: 1.2em 0;
+  padding: 0.6em 1.1em;
+  border-left: 3px solid var(--color-border);
+  background: var(--color-bg-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--color-fg-soft);
+}
+.report-body blockquote p:first-child { margin-top: 0; }
+.report-body blockquote p:last-child  { margin-bottom: 0; }
+
+/* ---------- code ---------- */
+
+.report-body code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-bg-code);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border-soft);
+}
+
+.report-body pre {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  background: var(--color-bg-code);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 1.1em 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.report-body pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ---------- tables ---------- */
+
+.report-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.report-body thead {
+  background: var(--color-bg-soft);
+}
+.report-body th,
+.report-body td {
+  padding: 8px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-soft);
+  vertical-align: top;
+}
+.report-body th {
+  font-weight: 600;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.report-body tbody tr:last-child td { border-bottom: 0; }
+.report-body tbody tr:nth-child(even) {
+  background: var(--color-bg-soft);
+}
+
+/* ---------- mermaid ---------- */
+
+.report-body .mermaid,
+.report-body pre.mermaid {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin: 1.2em 0;
+  text-align: center;
+  overflow-x: auto;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+/* don't render the mermaid source text before mermaid.js initializes */
+.report-body pre.mermaid:not([data-processed="true"]) {
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--color-fg-muted);
+  text-align: left;
+}
+
+/* ---------- details/summary ---------- */
+
+.report-body details {
+  margin: 1em 0;
+  padding: 10px 14px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius);
+}
+.report-body details > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.report-body details[open] > summary {
+  margin-bottom: 0.5em;
+}
+
+/* ---------- images ---------- */
+
+.report-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- footnotes (python-markdown extension) ---------- */
+
+.report-body .footnote {
+  font-size: 0.85rem;
+  color: var(--color-fg-soft);
+  border-top: 1px solid var(--color-border);
+  margin-top: 3em;
+  padding-top: 1em;
+}
+
+/* ---------- print ---------- */
+
+@media print {
+  body { background: #fff; color: #000; }
+  main.report { padding: 0; max-width: none; }
+  .report-body pre, .report-body table, .report-body .mermaid {
+    page-break-inside: avoid;
+    box-shadow: none;
+    border-color: #999;
+  }
+  .report-body a {
+    color: inherit;
+    border-bottom: 0;
+  }
+  .report-body a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+  .report-meta { color: #555; }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+  main.report { padding: 32px 16px 64px; }
+  .report-title { font-size: 1.5rem; }
+  .report-body h2 { font-size: 1.2rem; }
+  .report-body table { font-size: 0.82rem; }
+  .report-body th, .report-body td { padding: 6px 10px; }
+}
