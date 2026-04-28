@@ -1,7 +1,7 @@
 # gin-bai
 
 <p align="center">
-  <img src="assets/readme.png" alt="클근출 해병" width="240">
+  <img src="assets/readme.png" alt="gin-bai" width="240">
 </p>
 
 > GitHub 레포 → graphify 클러스터링 + git 히스토리 + 디자인 문서 인테이크 → god-node 점수로 라우팅된 딥다이브 서브에이전트 → Obsidian 볼트 안에 만들어지는 Karpathy 스타일 LLM 위키 (철학 & 불변식 페이지 포함).
@@ -10,7 +10,7 @@
 
 ## 개요
 
-> 긴빠이는 해병대의 유구한 문화로써, 옆 소대 빨래줄에 걸린 전투복부터 행정반 책상 위 믹스커피 한 봉지까지 **"필요하면 챙긴다"** 는 숭고한 정신을 담고 있다. 본디 윗선에 들키지 않고, 흔적 없이, 그러나 확실하게 가져오는 것이 핵심이다.
+> 긴빠이는 해병대의 유구한 문화로써, 옆 소대 빨래줄에 걸린 전투복부터 행정반 책상 위 믹스커피 한 봉지까지 **"필요하면 챙긴다"**는 숭고한 정신을 담고 있다. 본디 윗선에 들키지 않고, 흔적 없이, 그러나 확실하게 가져오는 것이 핵심이다.
 
 `gin-bai`는 이 정신을 21세기 소프트웨어 엔지니어링에 이식한 도구다.
 
@@ -36,7 +36,7 @@ GitHub URL이 주어지면 `gin-bai`는 다음 단계를 수행합니다.
 4. **Git 히스토리 추출** — 최근 12개월 커밋 케이던스, 상위 기여자, 릴리스 태그 타임라인, BREAKING / 마이그레이션 / 리라이트 커밋, hot files(가장 자주 수정된 경로 상위 20), 커밋 메시지 컨벤션(Conventional / Gitmoji / Issue-tagged / freeform)을 `history_analysis.md`로 정리.
 5. **클러스터링** — [`graphify`](https://pypi.org/project/graphifyy/)로 코드베이스를 커뮤니티로 묶고, 각 커뮤니티의 god-node(핵심 파일/심볼)를 식별.
 6. **클러스터 캡 + 모델 라우팅** — 클러스터가 10개를 넘으면 god-score 상위 10개만 1급으로 두고 나머지는 단일 `Misc` 클러스터로 합쳐 haiku 한 번으로 처리. 라우팅은 opus를 단 하나(최상위 god-cluster)에만 예약:
-   - `top 1 by god score` → **opus** *(god-cluster, 정확히 1개)*
+   - `top 1 by god score` → **opus** _(god-cluster, 정확히 1개)_
    - `median ≤ score < top` → **sonnet**
    - `score < median` → **haiku**
    - `Misc (merged tail)` → **haiku**
@@ -47,6 +47,16 @@ GitHub URL이 주어지면 `gin-bai`는 다음 단계를 수행합니다.
    - `philosophy.md` — 모든 클러스터의 철학 섹션을 cross-cutting / cluster-specific / stated-but-not-observed 세 그룹으로 합성. **모든 주장에 인용 필수**.
    - `log.md` — append-only 인제스트 히스토리.
 9. **클린업** — 임시 클론 디렉터리 삭제.
+
+---
+
+## 빠른 설치
+
+Claude Code 세션에 아래 한 줄을 그대로 붙여넣으면 알아서 설치해줍니다 (레포의 `.claude/` 디렉터리만 **현재 작업 폴더의 `.claude/`** 로 가져옵니다):
+
+```
+https://github.com/jace-leee/gin-bai 의 .claude 디렉터리만 현재 폴더의 .claude/ 아래로 설치해줘 (레포 전체 클론 X, sparse-checkout 또는 raw 파일만, ~/.claude 같은 홈 디렉터리 건드리지 말 것)
+```
 
 ---
 
@@ -191,13 +201,13 @@ export GIN_BAI_VAULT="$HOME/Desktop/note"
 
 ## 실패 처리
 
-| 상황 | 동작 |
-|------|------|
-| 클론 실패 | 중단 후 새로 만든 볼트 폴더 삭제, 로그 미기록. |
-| 커밋 히스토리 없음 (`COMMITS == 0`) | `history_analysis.md`에 한 줄만 기록 후 계속 진행. |
-| graphify가 빈 그래프 반환 | `EMPTY.md` 한 장 작성 후 클린업, 로그에 `Notes: empty graph` 추가. |
-| 서브에이전트 실패 | `communities/<slug>.md`에 "rerun /gin-bai to retry" placeholder만 남기고 `philosophy.md` 합성 시 해당 클러스터 스킵, 로그에 누락 기재. |
-| 클린업 실패 | 정확한 경로를 함께 경고만 출력 (수동으로 `rm -rf`). 실행 자체는 중단하지 않음. |
+| 상황                                | 동작                                                                                                                                   |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| 클론 실패                           | 중단 후 새로 만든 볼트 폴더 삭제, 로그 미기록.                                                                                         |
+| 커밋 히스토리 없음 (`COMMITS == 0`) | `history_analysis.md`에 한 줄만 기록 후 계속 진행.                                                                                     |
+| graphify가 빈 그래프 반환           | `EMPTY.md` 한 장 작성 후 클린업, 로그에 `Notes: empty graph` 추가.                                                                     |
+| 서브에이전트 실패                   | `communities/<slug>.md`에 "rerun /gin-bai to retry" placeholder만 남기고 `philosophy.md` 합성 시 해당 클러스터 스킵, 로그에 누락 기재. |
+| 클린업 실패                         | 정확한 경로를 함께 경고만 출력 (수동으로 `rm -rf`). 실행 자체는 중단하지 않음.                                                         |
 
 ---
 
